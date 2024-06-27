@@ -5,12 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFC Music Recommendation</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('keydown', function(event) {
+                if (event.key === '/') {
+                    var adminForm = document.getElementById('adminForm');
+                    if (adminForm.style.display === 'none') {
+                        adminForm.style.display = 'block';
+                    } else {
+                        adminForm.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h1 class="text-2xl font-bold mb-6 text-center">Welcome to the NFC Music Recommendation App</h1>
-        <form action="{{ url_for('scan') }}" method="post" class="text-center">
+        <form action="{{ url_for('scan') }}" method="post" class="text-center mb-4">
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Scan NFC Card</button>
+        </form>
+        <form id="adminForm" action="{{ url_for('admin_login') }}" method="post" class="text-center" style="display:none;">
+            <div class="mb-4">
+                <input type="password" name="password" placeholder="Admin Password" class="border border-gray-300 p-2 rounded w-full">
+            </div>
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">Admin Login</button>
         </form>
     </div>
 </body>
