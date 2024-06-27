@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Songs Requested</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-4xl mx-auto py-8">
+        <h1 class="text-3xl font-bold mb-4">Admin Dashboard - Songs Requested</h1>
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">UID</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Song</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% for song_data in all_songs %}
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ song_data['uid'] }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">{{ song_data['song'] }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <form action="{{ url_for('remove_song') }}" method="post">
+                                <input type="hidden" name="song" value="{{ song_data['song'] }}">
+                                <button type="submit" class="text-red-600 hover:text-red-900">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

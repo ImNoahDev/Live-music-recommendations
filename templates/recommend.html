@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommend Songs</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center">Recommend Songs</h1>
+        <form action="{{ url_for('recommend', uid=uid) }}" method="post" class="mb-6">
+            <div class="mb-4">
+                <input type="text" name="song_name" placeholder="Enter song name" required class="w-full p-2 border border-gray-300 rounded">
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Recommend</button>
+        </form>
+        {% if message %}
+        <p class="text-red-500 mb-4">{{ message }}</p>
+        {% endif %}
+        <h2 class="text-xl font-bold mb-4">Recommended Songs</h2>
+        <ul class="list-disc pl-5">
+            {% for song in songs %}
+            <li class="mb-2">{{ song }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
